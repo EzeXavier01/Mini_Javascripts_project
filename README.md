@@ -1,0 +1,1 @@
+* Learning JavaScript through creating mini projects
