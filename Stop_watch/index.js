@@ -2,6 +2,8 @@ let secondsElapsed = 0;
 let interval = null;
 const time = document.getElementById("time")
 const body = document.getElementsByTagName("body")[0]
+const warmColors = ['#ffadad', '#ffd6a5', '#fdffb6', '#caffbf', '#ffc6ff'];
+let colorIndex = 0;
 function padStart(value) {
     return String(value).padStart(2, "0")
 }
@@ -32,11 +34,20 @@ function resetClock() {
     setTime()
 }
 
-function randomColor(){
-    const red = Math.round(Math.random() *255)
-    const blue = Math.round(Math.random() *255)
-    const green = Math.round(Math.random() *255)
-  
-    const color = `rgb(${red}, ${green}, ${blue})`
-    body.style.backgroundColor = color
-  }
+// Function to change the background color in sequence
+function changeBackgroundColor() {
+    colorIndex = (colorIndex + 1) % warmColors.length; // Cycle through the color array
+    document.body.style.backgroundColor = warmColors[colorIndex];
+}
+
+// Set an interval to automatically change the background color every 3 seconds
+function startAutoColorChange() {
+    setInterval(changeBackgroundColor, 3500); // Change color every 3 seconds
+}
+
+
+// Initialize the TODO list when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+
+    startAutoColorChange(); // Start the automatic background color changing
+});
